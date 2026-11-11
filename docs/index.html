@@ -81,16 +81,12 @@
       </a>
 
       <div class="nav-group-title">
-        <span data-lang="en">Transport &amp; Publishing</span>
-        <span data-lang="ru">Транспорт и публикация</span>
+        <span data-lang="en">Transport &amp; Utilities</span>
+        <span data-lang="ru">Транспорт и утилиты</span>
       </div>
       <a class="nav-link" href="#transport-tools">
         <span data-lang="en">Polling, Webhook &amp; Mini Apps</span>
         <span data-lang="ru">Polling, Webhook и Mini Apps</span>
-      </a>
-      <a class="nav-link" href="#publishing">
-        <span data-lang="en">GitHub Pages, CI &amp; crates.io</span>
-        <span data-lang="ru">GitHub Pages, CI и crates.io</span>
       </a>
 
       <div class="nav-group-title">
@@ -141,7 +137,7 @@
             </div>
           </div>
           <div class="callout tip">
-            <strong>Live API Reference:</strong> When deployed with <code>.github/workflows/docs.yml</code>, full generated Rustdoc documentation lives at
+            <strong>API Reference:</strong> Browse generated Rustdoc documentation for every type, trait, and request builder at
             <a href="./api/rustgram/index.html"><code>./api/rustgram/index.html</code></a>.
           </div>
         </div>
@@ -179,7 +175,7 @@
             </div>
           </div>
           <div class="callout tip">
-            <strong>Справочник Rustdoc:</strong> При деплое через <code>.github/workflows/docs.yml</code> полная автогенерируемая API-документация доступна по адресу
+            <strong>Справочник Rustdoc:</strong> Полная API-документация по всем типам, трейтам и билдерам запросов доступна по адресу
             <a href="./api/rustgram/index.html"><code>./api/rustgram/index.html</code></a>.
           </div>
         </div>
@@ -191,7 +187,7 @@
           <h2>Quick Start &amp; Cargo Features</h2>
           <p>Add <code>rustgram</code> and <code>tokio</code> to your project's <code>Cargo.toml</code>:</p>
           <pre><code>[dependencies]
-rustgram = { git = "https://github.com/&lt;your-username&gt;/RustGram" }
+rustgram = { git = "https://github.com/lethemery/RustGram" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }</code></pre>
 
           <table>
@@ -237,7 +233,7 @@ async fn main() -&gt; Result&lt;()&gt; {
           <h2>Быстрый старт и Cargo-фичи</h2>
           <p>Добавьте <code>rustgram</code> и <code>tokio</code> в <code>Cargo.toml</code> вашего проекта:</p>
           <pre><code>[dependencies]
-rustgram = { git = "https://github.com/&lt;your-username&gt;/RustGram" }
+rustgram = { git = "https://github.com/lethemery/RustGram" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }</code></pre>
 
           <table>
@@ -991,97 +987,6 @@ async fn run_webhook_and_helpers(bot: Bot, router: Router) -&gt; Result&lt;()&gt
     let _ = verify_init_data;
     Ok(())
 }</code></pre>
-        </div>
-      </section>
-
-      <!-- 10. PUBLISHING & GITHUB PAGES -->
-      <section id="publishing" class="doc-section">
-        <div data-lang="en">
-          <h2>Publishing to GitHub, GitHub Pages &amp; crates.io</h2>
-          <p>
-            The repository already includes everything needed for open-source hosting, automated CI checks, GitHub Pages deployment, and crates.io publishing:
-          </p>
-          <ul>
-            <li><code>.github/workflows/ci.yml</code> — runs <code>cargo fmt --all --check</code>, <code>cargo clippy --all-targets -- -D warnings</code>, minimal-feature check, <code>cargo test --all-targets</code>, and zero-warning <code>cargo doc</code>.</li>
-            <li><code>.github/workflows/docs.yml</code> — builds Rustdoc (<code>target/doc</code>), combines it with <code>docs/</code> into <code>_site/</code> (with <code>/api/rustgram/index.html</code>), and deploys to GitHub Pages.</li>
-            <li><code>LICENSE-MIT</code> &amp; <code>LICENSE-APACHE</code> — dual-license files matching <code>Cargo.toml</code>.</li>
-            <li><code>docs/.nojekyll</code> — disables Jekyll processing so static HTML/CSS/JS and Rustdoc assets load cleanly.</li>
-          </ul>
-
-          <h3>Step 1: Push Repository to GitHub</h3>
-          <pre><code>cd c:\Projects\RustGram
-git init -b main
-git add .
-git commit -m "Initial release: rustgram Bot API 10.4 + bilingual GitHub Pages docs"
-git remote add origin https://github.com/&lt;your-username&gt;/RustGram.git
-git push -u origin main</code></pre>
-
-          <h3>Step 2: Enable GitHub Pages</h3>
-          <ol>
-            <li>Open your repository on GitHub and go to <strong>Settings &rarr; Pages</strong>.</li>
-            <li>Under <strong>Build and deployment &rarr; Source</strong>, choose <strong>GitHub Actions</strong> (recommended: publishes both this bilingual portal and Rustdoc API at <code>/api/rustgram/index.html</code>).</li>
-            <li>Trigger <em>Deploy Documentation to GitHub Pages</em> from the <strong>Actions</strong> tab (or push to <code>main</code>). Your site will be live at <code>https://&lt;your-username&gt;.github.io/RustGram/</code>.</li>
-          </ol>
-          <div class="callout tip">
-            <strong>Static-only fallback:</strong> If you ever prefer publishing without GitHub Actions, set Source to <em>Deploy from a branch</em> &rarr; <code>main</code> &rarr; <code>/docs</code> folder. The interactive EN/RU guide will work standalone immediately.
-          </div>
-
-          <h3>Step 3: Publish to crates.io</h3>
-          <ol>
-            <li>Update <code>repository</code>, <code>homepage</code>, and <code>documentation</code> URLs in <code>Cargo.toml</code> to your GitHub / Pages URLs.</li>
-            <li>Run a full dry-run verification locally, then log in and publish:</li>
-          </ol>
-          <pre><code>cargo fmt --all -- --check
-cargo clippy --all-targets -- -D warnings
-cargo test --all-targets
-cargo doc --no-deps --all-features
-cargo publish --dry-run
-cargo login
-cargo publish</code></pre>
-        </div>
-
-        <div data-lang="ru">
-          <h2>Публикация на GitHub, GitHub Pages и crates.io</h2>
-          <p>
-            В репозитории уже подготовлена вся инфраструктура для публикации исходного кода, автопроверок CI, сайта документации на GitHub Pages и пакета на crates.io:
-          </p>
-          <ul>
-            <li><code>.github/workflows/ci.yml</code> — проверяет форматирование (<code>cargo fmt</code>), линтер <code>cargo clippy -D warnings</code>, сборку без default-фич, все тесты и сборку <code>cargo doc</code> без предупреждений.</li>
-            <li><code>.github/workflows/docs.yml</code> — собирает Rustdoc (<code>target/doc</code>), объединяет его с папкой <code>docs/</code> в каталог <code>_site/</code> (где API лежит в <code>/api/rustgram/index.html</code>) и публикует сайт в GitHub Pages.</li>
-            <li><code>LICENSE-MIT</code> и <code>LICENSE-APACHE</code> — двойная лицензия в соответствии с <code>Cargo.toml</code>.</li>
-            <li><code>docs/.nojekyll</code> — отключает Jekyll, чтобы CSS/JS-ресурсы и страницы Rustdoc корректно загружались без изменений.</li>
-          </ul>
-
-          <h3>Шаг 1: Загрузка репозитория на GitHub</h3>
-          <pre><code>cd c:\Projects\RustGram
-git init -b main
-git add .
-git commit -m "Initial release: rustgram Bot API 10.4 + bilingual GitHub Pages docs"
-git remote add origin https://github.com/&lt;your-username&gt;/RustGram.git
-git push -u origin main</code></pre>
-
-          <h3>Шаг 2: Включение GitHub Pages</h3>
-          <ol>
-            <li>Откройте репозиторий на GitHub и перейдите в <strong>Settings &rarr; Pages</strong>.</li>
-            <li>В разделе <strong>Build and deployment &rarr; Source</strong> выберите <strong>GitHub Actions</strong> (рекомендуется: публикует и этот двуязычный сайт, и полный Rustdoc в <code>/api/rustgram/index.html</code>).</li>
-            <li>Запустите workflow <em>Deploy Documentation to GitHub Pages</em> во вкладке <strong>Actions</strong> (или просто сделайте <code>git push</code> в <code>main</code>). Сайт появится по адресу <code>https://&lt;your-username&gt;.github.io/RustGram/</code>.</li>
-          </ol>
-          <div class="callout tip">
-            <strong>Упрощённый вариант без Actions:</strong> В настройках Pages можно выбрать <em>Deploy from a branch</em> &rarr; ветка <code>main</code> &rarr; папка <code>/docs</code>. Этот статический сайт работает полностью автономно и без сборки.
-          </div>
-
-          <h3>Шаг 3: Публикация крейта на crates.io</h3>
-          <ol>
-            <li>Пропишите актуальные ссылки в полях <code>repository</code>, <code>homepage</code> и <code>documentation</code> в файле <code>Cargo.toml</code>.</li>
-            <li>Выполните локальную проверку и публикацию:</li>
-          </ol>
-          <pre><code>cargo fmt --all -- --check
-cargo clippy --all-targets -- -D warnings
-cargo test --all-targets
-cargo doc --no-deps --all-features
-cargo publish --dry-run
-cargo login
-cargo publish</code></pre>
         </div>
       </section>
 

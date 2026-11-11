@@ -2,7 +2,7 @@
 
 Async, strongly-typed Rust library and framework for building Telegram bots targeting **Telegram Bot API 10.4** (`rustgram::BOT_API_VERSION == "10.4"`).
 
-**[Documentation Site (GitHub Pages)](docs/index.html)** · **[English Manual](docs/en/README.md)** · **[Документация на русском](docs/ru/README.md)**
+**[Documentation Site (GitHub Pages)](https://lethemery.github.io/RustGram/)** · **[Rustdoc API](https://lethemery.github.io/RustGram/api/rustgram/index.html)** · **[English Manual](docs/en/README.md)** · **[Документация на русском](docs/ru/README.md)**
 
 ---
 
@@ -24,7 +24,7 @@ Async, strongly-typed Rust library and framework for building Telegram bots targ
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/<your-username>/RustGram" }
+rustgram = { git = "https://github.com/lethemery/RustGram" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
@@ -102,12 +102,11 @@ cargo test --all-targets
 
 ---
 
-## Documentation, GitHub Pages & Publishing
+## Documentation
 
-- **Bilingual Web Portal:** [`docs/index.html`](docs/index.html) (switchable EN / RU, light/dark themes, instant search, code copy buttons).
-- **Full Guides:** [English](docs/en/README.md) · [Русский](docs/ru/README.md).
-- **GitHub Pages Automation:** [`.github/workflows/docs.yml`](.github/workflows/docs.yml) builds both `docs/` and Rustdoc (`/api/rustgram/index.html`). Enable via **Settings → Pages → Source: GitHub Actions**.
-- **CI Checks:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+- **GitHub Pages Documentation:** [https://lethemery.github.io/RustGram/](https://lethemery.github.io/RustGram/) ([`docs/index.html`](docs/index.html)) — EN / RU switcher, light/dark themes, search, copyable snippets.
+- **Rustdoc API Reference:** [https://lethemery.github.io/RustGram/api/rustgram/index.html](https://lethemery.github.io/RustGram/api/rustgram/index.html)
+- **Full Developer Guides:** [English](docs/en/README.md) · [Русский](docs/ru/README.md)
 
 ---
 

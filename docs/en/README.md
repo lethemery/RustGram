@@ -20,7 +20,6 @@
 8. [Finite State Machine (FSM)](#8-finite-state-machine-fsm)
 9. [Polling, Axum Webhooks, Mini Apps & Formatting](#9-polling-axum-webhooks-mini-apps--formatting)
 10. [Examples & Verification Commands](#10-examples--verification-commands)
-11. [Publishing to GitHub, GitHub Pages & crates.io](#11-publishing-to-github-github-pages--cratesio)
 
 ---
 
@@ -54,7 +53,7 @@ Add `rustgram` and `tokio` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/<your-username>/RustGram" }
+rustgram = { git = "https://github.com/lethemery/RustGram" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
@@ -62,7 +61,7 @@ To build a minimal polling-only bot without `axum` webhooks or `webapp` verifica
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/<your-username>/RustGram", default-features = false, features = ["rustls-tls"] }
+rustgram = { git = "https://github.com/lethemery/RustGram", default-features = false, features = ["rustls-tls"] }
 ```
 
 ### Feature Matrix
@@ -466,39 +465,4 @@ cargo clippy --all-targets -- -D warnings
 cargo check --no-default-features --features rustls-tls --lib --examples
 RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features
 cargo test --all-targets
-```
-
----
-
-## 11. Publishing to GitHub, GitHub Pages & crates.io
-
-### Step 1: Push Repository to GitHub
-
-```bash
-cd c:\Projects\RustGram
-git init -b main
-git add .
-git commit -m "Initial release: rustgram Bot API 10.4 + bilingual docs"
-git remote add origin https://github.com/<your-username>/RustGram.git
-git push -u origin main
-```
-
-### Step 2: Enable GitHub Pages (with Rustdoc + Bilingual Site)
-
-1. Open **Settings → Pages** in your GitHub repository.
-2. Under **Build and deployment → Source**, select **GitHub Actions**.
-3. Push to `main` (or run **Actions → Deploy Documentation to GitHub Pages → Run workflow**).
-4. `.github/workflows/docs.yml` builds `cargo doc --no-deps --all-features`, places Rustdoc under `/api/rustgram/index.html`, and deploys `docs/` at `https://<your-username>.github.io/RustGram/`.
-
-*(Alternative without Actions: select **Deploy from a branch** → `main` → `/docs`. The static site works standalone, without `/api/` Rustdoc.)*
-
-### Step 3: Publish to `crates.io`
-
-1. Update `repository`, `homepage`, and `documentation` fields in `Cargo.toml` to point to your GitHub and GitHub Pages URLs.
-2. Verify packaging and publish:
-
-```bash
-cargo publish --dry-run
-cargo login
-cargo publish
 ```

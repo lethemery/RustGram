@@ -20,7 +20,6 @@
 8. [Конечный автомат (FSM)](#8-конечный-автомат-fsm)
 9. [Polling, Axum Webhook, Mini Apps и форматирование](#9-polling-axum-webhook-mini-apps-и-форматирование)
 10. [Примеры и команды проверки](#10-примеры-и-команды-проверки)
-11. [Публикация на GitHub, GitHub Pages и crates.io](#11-публикация-на-github-github-pages-и-cratesio)
 
 ---
 
@@ -54,7 +53,7 @@ use rustgram::prelude::*;
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/<your-username>/RustGram" }
+rustgram = { git = "https://github.com/lethemery/RustGram" }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
@@ -62,7 +61,7 @@ tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/<your-username>/RustGram", default-features = false, features = ["rustls-tls"] }
+rustgram = { git = "https://github.com/lethemery/RustGram", default-features = false, features = ["rustls-tls"] }
 ```
 
 ### Таблица Cargo-фич
@@ -470,39 +469,4 @@ cargo clippy --all-targets -- -D warnings
 cargo check --no-default-features --features rustls-tls --lib --examples
 RUSTDOCFLAGS="-D warnings" cargo doc --no-deps --all-features
 cargo test --all-targets
-```
-
----
-
-## 11. Публикация на GitHub, GitHub Pages и crates.io
-
-### Шаг 1: Загрузка кода на GitHub
-
-```bash
-cd c:\Projects\RustGram
-git init -b main
-git add .
-git commit -m "Initial release: rustgram Bot API 10.4 + bilingual docs"
-git remote add origin https://github.com/<your-username>/RustGram.git
-git push -u origin main
-```
-
-### Шаг 2: Включение GitHub Pages (двуязычный сайт + Rustdoc API)
-
-1. Откройте репозиторий на GitHub и перейдите в **Settings → Pages**.
-2. В пункте **Build and deployment → Source** выберите **GitHub Actions**.
-3. Сделайте `git push` в ветку `main` (или запустите workflow **Deploy Documentation to GitHub Pages** вручную во вкладке **Actions**).
-4. Workflow [`.github/workflows/docs.yml`](../../.github/workflows/docs.yml) соберёт `cargo doc --no-deps --all-features`, разместит Rustdoc по адресу `/api/rustgram/index.html` и опубликует двуязычный сайт из папки `docs/` на `https://<your-username>.github.io/RustGram/`.
-
-*(Альтернативный способ без Actions: **Deploy from a branch** → `main` → `/docs`. Статический сайт `docs/index.html` работает сразу без этапа сборки, но без автосгенерированного Rustdoc в `/api/`.)*
-
-### Шаг 3: Публикация библиотеки на `crates.io`
-
-1. Перед публикацией обновите поля `repository`, `homepage` и `documentation` в файле `Cargo.toml`, указав ваш реальный GitHub-репозиторий и адрес GitHub Pages.
-2. Запустите пробную упаковку и публикацию:
-
-```bash
-cargo publish --dry-run
-cargo login
-cargo publish
 ```
