@@ -5,7 +5,7 @@ use std::time::Duration;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-/// Convenience result alias used across `rustgram`.
+/// Convenience result alias used across `rustgram-api`.
 pub type Result<T> = std::result::Result<T, Error>;
 
 /// Additional parameters returned by Telegram on certain API errors
@@ -75,7 +75,7 @@ impl ApiError {
     }
 }
 
-/// Top-level error type for all `rustgram` operations.
+/// Top-level error type for all `rustgram-api` operations.
 #[derive(Debug, Error)]
 pub enum Error {
     /// Error payload returned by Telegram Bot API (`ok: false`).

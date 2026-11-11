@@ -7,7 +7,7 @@
 
 use std::sync::Arc;
 
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum RegState {

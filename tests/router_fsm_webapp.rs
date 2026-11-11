@@ -3,10 +3,10 @@ use std::time::Duration;
 
 use axum::http::{HeaderMap, HeaderValue, StatusCode};
 use hmac::{Hmac, Mac};
-use rustgram::prelude::*;
-use rustgram::router::StateKey;
-use rustgram::types::{WIDGET_DATA_MAX_BYTES, WIDGET_HTML_MAX_BYTES};
-use rustgram::webhook::{
+use rustgram_api::prelude::*;
+use rustgram_api::router::StateKey;
+use rustgram_api::types::{WIDGET_DATA_MAX_BYTES, WIDGET_HTML_MAX_BYTES};
+use rustgram_api::webhook::{
     SECRET_TOKEN_HEADER, WebhookConfig, parse_webhook_request, webhook_router,
 };
 use serde_json::json;
@@ -266,7 +266,7 @@ async fn bot_builder_urls_validation_and_precancelled_polling() {
     assert_eq!(builder.payload.cache_time, Some(3600));
 
     // ResponseParameters deserialization & ApiError helpers.
-    let params: rustgram::ResponseParameters =
+    let params: rustgram_api::ResponseParameters =
         serde_json::from_value(json!({ "retry_after": 3, "migrate_to_chat_id": -100999 })).unwrap();
     let api_err = ApiError::new(429, "Too Many Requests: retry after 3", Some(params));
     assert!(api_err.is_rate_limited());

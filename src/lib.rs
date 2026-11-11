@@ -34,7 +34,7 @@ pub const BOT_API_VERSION: &str = "10.4";
 pub use client::{Bot, BotBuilder, DEFAULT_API_URL};
 pub use error::{ApiError, Error, ResponseParameters, Result};
 
-/// Convenient re-exports for everyday bot development (`use rustgram::prelude::*;`).
+/// Convenient re-exports for everyday bot development (`use rustgram_api::prelude::*;`).
 pub mod prelude {
     pub use crate::BOT_API_VERSION;
     pub use crate::client::{Bot, BotBuilder};

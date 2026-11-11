@@ -1,6 +1,6 @@
-# rustgram — Полная документация (Русский)
+# rustgram-api — Полная документация (Русский)
 
-> Асинхронная, строго типизированная библиотека и фреймворк на Rust для создания Telegram-ботов с поддержкой **Telegram Bot API 10.4** (`rustgram::BOT_API_VERSION == "10.4"`).
+> Асинхронная, строго типизированная библиотека и фреймворк на Rust для создания Telegram-ботов с поддержкой **Telegram Bot API 10.4** (`rustgram_api::BOT_API_VERSION == "10.4"`).
 
 - [Интерактивный двуязычный сайт документации](../index.html)
 - [Documentation in English](../en/README.md)
@@ -25,35 +25,35 @@
 
 ## 1. Обзор и архитектура
 
-Библиотека `rustgram` разделена на понятные независимые модули:
+Библиотека `rustgram-api` разделена на понятные независимые модули:
 
 | Модуль | Назначение |
 | --- | --- |
-| `rustgram::client` | `Bot`, `BotBuilder`, маршрутизация URL (`method_url` / `file_url`), JSON и `multipart/form-data` запросы, автоматические повторы при 429 rate limit, скачивание файлов. |
-| `rustgram::types` | Модели Serde для Telegram Bot API 9.4–10.4 (`Update`, `Message`, `Widget`, `WidgetQuery`, `RichMessage`, `RichBlock`, `EphemeralMessageParameters` и др.). Крупные варианты упакованы в `Box`, чтобы `Update` и `Message` занимали `< 4096` байт на стеке. |
-| `rustgram::requests` | Типизированные билдеры запросов с реализацией `IntoFuture<Output = Result<T>>` для сообщений, файлов, чатов, управляемых ботов, апдейтов, виджетов, Rich- и эфемерных сообщений. |
-| `rustgram::router` | `Router`, `Dispatcher`, `Context`, middleware (`Next`), встроенные фильтры `on::*` и FSM (`StateStorage<S>`, `MemoryStorage<S>`, `StateContext<S>`). |
-| `rustgram::polling` | Асинхронный `getUpdates`-поллер с экспоненциальным бэкоффом и корректным завершением через `CancellationToken`. |
-| `rustgram::webhook` *(фича `webhook`)* | HTTP-роутер и сервер для вебхуков на базе `axum`, проверка заголовка `SECRET_TOKEN_HEADER`, `parse_webhook_request`. |
-| `rustgram::webapp` *(фича `webapp`)* | Криптографическая проверка `initData` из Telegram Mini Apps по HMAC-SHA256 (`verify_init_data`). |
-| `rustgram::formatting` | Безопасное экранирование HTML и MarkdownV2, теги оформления включая `custom_emoji_html` и `date_time_html`. |
-| `rustgram::error` | `Error`, `ApiError` и `ResponseParameters` с хелперами (`is_rate_limited`, `retry_after`, `migrate_to_chat_id` и др.). |
+| `rustgram_api::client` | `Bot`, `BotBuilder`, маршрутизация URL (`method_url` / `file_url`), JSON и `multipart/form-data` запросы, автоматические повторы при 429 rate limit, скачивание файлов. |
+| `rustgram_api::types` | Модели Serde для Telegram Bot API 9.4–10.4 (`Update`, `Message`, `Widget`, `WidgetQuery`, `RichMessage`, `RichBlock`, `EphemeralMessageParameters` и др.). Крупные варианты упакованы в `Box`, чтобы `Update` и `Message` занимали `< 4096` байт на стеке. |
+| `rustgram_api::requests` | Типизированные билдеры запросов с реализацией `IntoFuture<Output = Result<T>>` для сообщений, файлов, чатов, управляемых ботов, апдейтов, виджетов, Rich- и эфемерных сообщений. |
+| `rustgram_api::router` | `Router`, `Dispatcher`, `Context`, middleware (`Next`), встроенные фильтры `on::*` и FSM (`StateStorage<S>`, `MemoryStorage<S>`, `StateContext<S>`). |
+| `rustgram_api::polling` | Асинхронный `getUpdates`-поллер с экспоненциальным бэкоффом и корректным завершением через `CancellationToken`. |
+| `rustgram_api::webhook` *(фича `webhook`)* | HTTP-роутер и сервер для вебхуков на базе `axum`, проверка заголовка `SECRET_TOKEN_HEADER`, `parse_webhook_request`. |
+| `rustgram_api::webapp` *(фича `webapp`)* | Криптографическая проверка `initData` из Telegram Mini Apps по HMAC-SHA256 (`verify_init_data`). |
+| `rustgram_api::formatting` | Безопасное экранирование HTML и MarkdownV2, теги оформления включая `custom_emoji_html` и `date_time_html`. |
+| `rustgram_api::error` | `Error`, `ApiError` и `ResponseParameters` с хелперами (`is_rate_limited`, `retry_after`, `migrate_to_chat_id` и др.). |
 
 Импорт базовых типов и фильтров:
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 ```
 
 ---
 
 ## 2. Установка и Cargo-фичи
 
-Добавьте `rustgram` и `tokio` в `Cargo.toml` вашего проекта:
+Добавьте `rustgram-api` и `tokio` в `Cargo.toml` вашего проекта:
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram" }
+rustgram-api = "0.1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
@@ -61,7 +61,7 @@ tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram", default-features = false, features = ["rustls-tls"] }
+rustgram-api = { version = "0.1", default-features = false, features = ["rustls-tls"] }
 ```
 
 ### Таблица Cargo-фич
@@ -69,8 +69,8 @@ rustgram = { git = "https://github.com/lethemery/RustGram", default-features = f
 | Фича | По умолчанию | Описание |
 | --- | --- | --- |
 | `rustls-tls` | Да | TLS через `rustls` + `ring` внутри `reqwest` без необходимости системного OpenSSL. |
-| `webhook` | Да | Подключает `rustgram::webhook` на базе `axum`. |
-| `webapp` | Да | Подключает `rustgram::webapp` для проверки `initData` (`hmac`, `sha2`, `hex`, `url`). |
+| `webhook` | Да | Подключает `rustgram_api::webhook` на базе `axum`. |
+| `webapp` | Да | Подключает `rustgram_api::webapp` для проверки `initData` (`hmac`, `sha2`, `hex`, `url`). |
 
 ---
 
@@ -80,7 +80,7 @@ rustgram = { git = "https://github.com/lethemery/RustGram", default-features = f
 
 ```rust,no_run
 use std::time::Duration;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -123,7 +123,7 @@ async fn main() -> Result<()> {
 Скачивание файла по `file_id`:
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn download_asset(bot: &Bot, file_id: &str) -> Result<bytes::Bytes> {
     bot.download_file_by_id(file_id).await
@@ -150,7 +150,7 @@ async fn download_asset(bot: &Bot, file_id: &str) -> Result<bytes::Bytes> {
 
 ### Локальная валидация ограничений
 
-Перед отправкой HTTP-запроса `rustgram` проверяет инварианты на стороне клиента:
+Перед отправкой HTTP-запроса `rustgram-api` проверяет инварианты на стороне клиента:
 
 - `WIDGET_HTML_MAX_BYTES` (`32_768` байт) и запрет нулевых байтов `\0` (`validate_widget_html`).
 - `WIDGET_DATA_MAX_BYTES` (`1_024` байт) для `public_data` и `chat_data` (`validate_widget_data`).
@@ -159,7 +159,7 @@ async fn download_asset(bot: &Bot, file_id: &str) -> Result<bytes::Bytes> {
 ### Отправка и обновление виджетов
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn widget_handlers(ctx: Context) -> Result<()> {
     let html = r#"
@@ -187,7 +187,7 @@ async fn widget_handlers(ctx: Context) -> Result<()> {
 Фильтры: `on::widget_query()`, `on::shared_widget_query()`, `on::any_widget_query()`, `on::widget_data()`, `on::widget_sign_data()`, `on::widget_sent_transaction()`:
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 fn build_widget_router() -> Router {
     Router::new().route(on::any_widget_query(), |ctx: Context| async move {
@@ -232,8 +232,8 @@ fn build_widget_router() -> Router {
 Поддерживаемые варианты `RichBlock`: `Paragraph`, `SectionHeading`, `Preformatted`, `Footer`, `Divider`, `MathematicalExpression`, `Anchor`, `List`, `BlockQuotation`, `ExpandableBlockQuotation`, `PullQuotation`, `Table` (`is_compact`), `Details`, `Thinking`, `Buttons` (с поддержкой `RichMessageButton::disabled`), `Document`, `Photo`, `Video`, `Audio`, `Animation`, `VoiceNote`, `Collage`, `Slideshow`, `Map`, а также `Unsupported` для будущих версий API.
 
 ```rust,no_run
-use rustgram::prelude::*;
-use rustgram::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
+use rustgram_api::prelude::*;
+use rustgram_api::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
 
 async fn stream_ai_answer(bot: &Bot, chat_id: i64, draft_id: i64) -> Result<()> {
     // Стриминговый черновик с кнопкой остановки (Bot API 10.3)
@@ -292,7 +292,7 @@ async fn stream_ai_answer(bot: &Bot, chat_id: i64, draft_id: i64) -> Result<()> 
 
 ```rust,no_run
 use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 use tokio::sync::Mutex;
 
 #[derive(Default)]
@@ -347,7 +347,7 @@ async fn main() -> Result<()> {
 
 ```rust,no_run
 use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum Wizard {
@@ -393,7 +393,7 @@ fn configure_fsm(bot: Bot) -> Dispatcher {
 ### Настройка Polling
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn run_custom_polling(bot: Bot, dp: Dispatcher) {
     let polling = Polling::new(bot)
@@ -411,8 +411,8 @@ async fn run_custom_polling(bot: Bot, dp: Dispatcher) {
 
 ```rust,no_run
 use std::net::SocketAddr;
-use rustgram::prelude::*;
-use rustgram::webhook::{WebhookConfig, serve_webhook};
+use rustgram_api::prelude::*;
+use rustgram_api::webhook::{WebhookConfig, serve_webhook};
 
 async fn start_webhook(bot: Bot, router: Router) -> Result<()> {
     let addr: SocketAddr = "0.0.0.0:8080".parse().unwrap();
@@ -438,8 +438,8 @@ async fn start_webhook(bot: Bot, router: Router) -> Result<()> {
 ### Проверка `initData` для Telegram Mini Apps (фича `webapp`)
 
 ```rust,no_run
-use rustgram::prelude::*;
-use rustgram::webapp::verify_init_data;
+use rustgram_api::prelude::*;
+use rustgram_api::webapp::verify_init_data;
 
 fn verify_webapp(raw_init_data: &str, bot_token: &str) -> Result<Option<i64>> {
     let verified = verify_init_data(raw_init_data, bot_token, Some(300), None)?;
@@ -447,7 +447,7 @@ fn verify_webapp(raw_init_data: &str, bot_token: &str) -> Result<Option<i64>> {
 }
 ```
 
-### Хелперы форматирования (`rustgram::formatting`)
+### Хелперы форматирования (`rustgram_api::formatting`)
 
 `escape_html`, `escape_markdown_v2`, `bold_html`, `italic_html`, `code_html`, `pre_html`, `link_html`, `mention_html`, `custom_emoji_html`, `date_time_html`.
 

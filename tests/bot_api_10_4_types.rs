@@ -1,9 +1,9 @@
-use rustgram::error::Error;
-use rustgram::formatting::{
+use rustgram_api::error::Error;
+use rustgram_api::formatting::{
     bold_html, custom_emoji_html, date_time_html, escape_html, escape_markdown_v2, mention_html,
     pre_html,
 };
-use rustgram::types::{
+use rustgram_api::types::{
     EphemeralMessageParameters, InputRichMessage, InputWidgetMessageContent, KeyboardButton,
     KeyboardButtonRequestManagedBot, MessageEntity, RichBlock, RichMessage, RichMessageButton,
     Update, UpdateKind, WIDGET_DATA_MAX_BYTES, WIDGET_HTML_MAX_BYTES, WidgetQueryType,
@@ -13,7 +13,7 @@ use serde_json::json;
 
 #[test]
 fn crate_targets_bot_api_10_4() {
-    assert_eq!(rustgram::BOT_API_VERSION, "10.4");
+    assert_eq!(rustgram_api::BOT_API_VERSION, "10.4");
 }
 
 #[test]

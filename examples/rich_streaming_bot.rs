@@ -9,8 +9,8 @@ use std::collections::HashSet;
 use std::sync::Arc;
 use std::time::Duration;
 
-use rustgram::prelude::*;
-use rustgram::types::{RichBlockTableCell, RichMessageButton};
+use rustgram_api::prelude::*;
+use rustgram_api::types::{RichBlockTableCell, RichMessageButton};
 use tokio::sync::RwLock;
 
 type CancelledChats = Arc<RwLock<HashSet<i64>>>;

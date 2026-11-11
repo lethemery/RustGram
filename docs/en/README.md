@@ -1,6 +1,6 @@
-# rustgram — Complete Documentation (English)
+# rustgram-api — Complete Documentation (English)
 
-> Async, strongly-typed Telegram Bot library and framework for Rust targeting **Telegram Bot API 10.4** (`rustgram::BOT_API_VERSION == "10.4"`).
+> Async, strongly-typed Telegram Bot library and framework for Rust targeting **Telegram Bot API 10.4** (`rustgram_api::BOT_API_VERSION == "10.4"`).
 
 - [Interactive Bilingual Docs Site](../index.html)
 - [Документация на русском языке](../ru/README.md)
@@ -25,35 +25,35 @@
 
 ## 1. Overview & Architecture
 
-`rustgram` separates transport, Telegram Bot API protocol models, request builders, and update dispatching into focused modules:
+`rustgram-api` separates transport, Telegram Bot API protocol models, request builders, and update dispatching into focused modules:
 
 | Module | Responsibility |
 | --- | --- |
-| `rustgram::client` | `Bot`, `BotBuilder`, URL routing (`method_url` / `file_url`), JSON & `multipart/form-data` execution, automatic 429 retry logic, file downloads. |
-| `rustgram::types` | Serde models covering Telegram Bot API 9.4 through 10.4 (`Update`, `Message`, `Widget`, `WidgetQuery`, `RichMessage`, `RichBlock`, `EphemeralMessageParameters`, etc.), compactly boxed to stay under `< 4096` bytes on the stack. |
-| `rustgram::requests` | Ergonomic builders implementing `IntoFuture<Output = Result<T>>` across messaging, files, chats, managed bots, updates/queries, widgets, and rich/ephemeral endpoints. |
-| `rustgram::router` | Composable `Router`, `Dispatcher`, `Context`, middleware (`Next`), `on::*` filters, and FSM (`StateStorage<S>`, `MemoryStorage<S>`, `StateContext<S>`). |
-| `rustgram::polling` | Resilient `getUpdates` stream and runner with exponential backoff and `CancellationToken` shutdown. |
-| `rustgram::webhook` *(feature `webhook`)* | Axum `Router` builder, `serve_webhook`, `SECRET_TOKEN_HEADER`, and `parse_webhook_request`. |
-| `rustgram::webapp` *(feature `webapp`)* | Constant-time-safe HMAC-SHA256 `verify_init_data` verifier for Telegram Mini Apps. |
-| `rustgram::formatting` | HTML and MarkdownV2 escaping plus tags including `custom_emoji_html` and `date_time_html`. |
-| `rustgram::error` | `Error`, `ApiError`, and `ResponseParameters` with helper predicates (`is_rate_limited`, `retry_after`, `migrate_to_chat_id`, etc.). |
+| `rustgram_api::client` | `Bot`, `BotBuilder`, URL routing (`method_url` / `file_url`), JSON & `multipart/form-data` execution, automatic 429 retry logic, file downloads. |
+| `rustgram_api::types` | Serde models covering Telegram Bot API 9.4 through 10.4 (`Update`, `Message`, `Widget`, `WidgetQuery`, `RichMessage`, `RichBlock`, `EphemeralMessageParameters`, etc.), compactly boxed to stay under `< 4096` bytes on the stack. |
+| `rustgram_api::requests` | Ergonomic builders implementing `IntoFuture<Output = Result<T>>` across messaging, files, chats, managed bots, updates/queries, widgets, and rich/ephemeral endpoints. |
+| `rustgram_api::router` | Composable `Router`, `Dispatcher`, `Context`, middleware (`Next`), `on::*` filters, and FSM (`StateStorage<S>`, `MemoryStorage<S>`, `StateContext<S>`). |
+| `rustgram_api::polling` | Resilient `getUpdates` stream and runner with exponential backoff and `CancellationToken` shutdown. |
+| `rustgram_api::webhook` *(feature `webhook`)* | Axum `Router` builder, `serve_webhook`, `SECRET_TOKEN_HEADER`, and `parse_webhook_request`. |
+| `rustgram_api::webapp` *(feature `webapp`)* | Constant-time-safe HMAC-SHA256 `verify_init_data` verifier for Telegram Mini Apps. |
+| `rustgram_api::formatting` | HTML and MarkdownV2 escaping plus tags including `custom_emoji_html` and `date_time_html`. |
+| `rustgram_api::error` | `Error`, `ApiError`, and `ResponseParameters` with helper predicates (`is_rate_limited`, `retry_after`, `migrate_to_chat_id`, etc.). |
 
 Import everything commonly used via:
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 ```
 
 ---
 
 ## 2. Installation & Cargo Features
 
-Add `rustgram` and `tokio` to your `Cargo.toml`:
+Add `rustgram-api` and `tokio` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram" }
+rustgram-api = "0.1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
@@ -61,7 +61,7 @@ To build a minimal polling-only bot without `axum` webhooks or `webapp` verifica
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram", default-features = false, features = ["rustls-tls"] }
+rustgram-api = { version = "0.1", default-features = false, features = ["rustls-tls"] }
 ```
 
 ### Feature Matrix
@@ -69,8 +69,8 @@ rustgram = { git = "https://github.com/lethemery/RustGram", default-features = f
 | Feature | Default | Description |
 | --- | --- | --- |
 | `rustls-tls` | Yes | Uses pure-Rust `rustls` + `ring` TLS inside `reqwest`. |
-| `webhook` | Yes | Enables `rustgram::webhook` powered by `axum`. |
-| `webapp` | Yes | Enables `rustgram::webapp` HMAC-SHA256 verification powered by `hmac`, `sha2`, `hex`, and `url`. |
+| `webhook` | Yes | Enables `rustgram_api::webhook` powered by `axum`. |
+| `webapp` | Yes | Enables `rustgram_api::webapp` HMAC-SHA256 verification powered by `hmac`, `sha2`, `hex`, and `url`. |
 
 ---
 
@@ -80,7 +80,7 @@ rustgram = { git = "https://github.com/lethemery/RustGram", default-features = f
 
 ```rust,no_run
 use std::time::Duration;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -117,7 +117,7 @@ async fn main() -> Result<()> {
 Download helpers on `Bot`:
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn download_asset(bot: &Bot, file_id: &str) -> Result<bytes::Bytes> {
     bot.download_file_by_id(file_id).await
@@ -126,7 +126,7 @@ async fn download_asset(bot: &Bot, file_id: &str) -> Result<bytes::Bytes> {
 
 ### Structured Error Inspection
 
-When Telegram returns an error JSON object (`ok: false`), `rustgram` surfaces `Error::Api(ApiError)`:
+When Telegram returns an error JSON object (`ok: false`), `rustgram-api` surfaces `Error::Api(ApiError)`:
 
 - `api_err.error_code` — HTTP-style status code returned by Telegram (e.g. `429`, `403`, `400`).
 - `api_err.description` — human-readable description.
@@ -144,7 +144,7 @@ Bot API 10.4 adds interactive HTML widgets rendered inside Telegram messages plu
 
 ### Built-in Invariant Validation
 
-Before executing HTTP requests, `rustgram` locally checks:
+Before executing HTTP requests, `rustgram-api` locally checks:
 
 - `WIDGET_HTML_MAX_BYTES` (`32_768` bytes) and absence of `\0` NUL bytes via `validate_widget_html`.
 - `WIDGET_DATA_MAX_BYTES` (`1_024` bytes) for `public_data` and `chat_data` via `validate_widget_data`.
@@ -153,7 +153,7 @@ Before executing HTTP requests, `rustgram` locally checks:
 ### Sending & Updating Widgets
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn widget_handlers(ctx: Context) -> Result<()> {
     // Send a shared interactive HTML widget from handler context
@@ -182,7 +182,7 @@ async fn widget_handlers(ctx: Context) -> Result<()> {
 Route `on::widget_query()`, `on::shared_widget_query()`, or `on::any_widget_query()`, as well as type-specific filters (`on::widget_data()`, `on::widget_sign_data()`, `on::widget_sent_transaction()`):
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 fn build_widget_router() -> Router {
     Router::new().route(on::any_widget_query(), |ctx: Context| async move {
@@ -228,8 +228,8 @@ Compose rich structured layouts using `InputRichMessage::html(...)`, `InputRichM
 Supported `RichBlock` variants include `Paragraph`, `SectionHeading`, `Preformatted`, `Footer`, `Divider`, `MathematicalExpression`, `Anchor`, `List`, `BlockQuotation`, `ExpandableBlockQuotation`, `PullQuotation`, `Table` (`is_compact`), `Details`, `Thinking`, `Buttons` (with `RichMessageButton::disabled`), `Document`, `Photo`, `Video`, `Audio`, `Animation`, `VoiceNote`, `Collage`, `Slideshow`, `Map`, and forward-compatible `Unsupported`.
 
 ```rust,no_run
-use rustgram::prelude::*;
-use rustgram::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
+use rustgram_api::prelude::*;
+use rustgram_api::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
 
 async fn stream_ai_answer(bot: &Bot, chat_id: i64, draft_id: i64) -> Result<()> {
     // Stream stoppable draft (Bot API 10.3)
@@ -288,7 +288,7 @@ When a user stops generation in the client, route `on::stopped_generation()` and
 
 ```rust,no_run
 use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 use tokio::sync::Mutex;
 
 #[derive(Default)]
@@ -343,7 +343,7 @@ Combinators & custom filters:
 
 ```rust,no_run
 use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum Wizard {
@@ -389,7 +389,7 @@ Implement `StateStorage<S>` for persistent external storage (Redis/PostgreSQL) i
 ### Polling Options
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn run_custom_polling(bot: Bot, dp: Dispatcher) {
     let polling = Polling::new(bot)
@@ -407,8 +407,8 @@ async fn run_custom_polling(bot: Bot, dp: Dispatcher) {
 
 ```rust,no_run
 use std::net::SocketAddr;
-use rustgram::prelude::*;
-use rustgram::webhook::{WebhookConfig, serve_webhook};
+use rustgram_api::prelude::*;
+use rustgram_api::webhook::{WebhookConfig, serve_webhook};
 
 async fn start_webhook(bot: Bot, router: Router) -> Result<()> {
     let addr: SocketAddr = "0.0.0.0:8080".parse().unwrap();
@@ -434,8 +434,8 @@ You can also integrate `webhook_router` or `parse_webhook_request(secret, &heade
 ### Telegram Mini App `initData` Verification (`webapp` feature)
 
 ```rust,no_run
-use rustgram::prelude::*;
-use rustgram::webapp::verify_init_data;
+use rustgram_api::prelude::*;
+use rustgram_api::webapp::verify_init_data;
 
 fn verify_webapp(raw_init_data: &str, bot_token: &str) -> Result<Option<i64>> {
     let verified = verify_init_data(raw_init_data, bot_token, Some(300), None)?;
@@ -443,7 +443,7 @@ fn verify_webapp(raw_init_data: &str, bot_token: &str) -> Result<Option<i64>> {
 }
 ```
 
-### Safe Formatting Helpers (`rustgram::formatting`)
+### Safe Formatting Helpers (`rustgram_api::formatting`)
 
 `escape_html`, `escape_markdown_v2`, `bold_html`, `italic_html`, `code_html`, `pre_html`, `link_html`, `mention_html`, `custom_emoji_html`, `date_time_html`.
 

@@ -5,7 +5,7 @@
 //! TELEGRAM_BOT_TOKEN=123456:ABC cargo run --example widget_bot
 //! ```
 
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 const COUNTER_WIDGET_HTML: &str = r#"<!doctype html>
 <html>

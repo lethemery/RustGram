@@ -38,11 +38,11 @@ jobs:
             '<html lang="en">' \
             '<head>' \
             '  <meta charset="utf-8">' \
-            '  <meta http-equiv="refresh" content="0; url=./rustgram/index.html">' \
-            '  <title>rustgram API Reference</title>' \
+            '  <meta http-equiv="refresh" content="0; url=./rustgram_api/index.html">' \
+            '  <title>rustgram-api API Reference</title>' \
             '</head>' \
             '<body>' \
-            '  <p>Redirecting to <a href="./rustgram/index.html">rustgram API Reference</a>...</p>' \
+            '  <p>Redirecting to <a href="./rustgram_api/index.html">rustgram-api API Reference</a>...</p>' \
             '</body>' \
             '</html>' > _site/api/index.html
           touch _site/.nojekyll

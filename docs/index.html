@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>rustgram — Telegram Bot API 10.4 Library for Rust (EN / RU)</title>
-  <meta name="description" content="Bilingual documentation for rustgram: async Telegram Bot API 10.4 Rust library with HTML Widgets, TON Wallet flows, Rich Messages, Stoppable Streaming, Ephemeral Messages, FSM, Router, Polling, Webhooks &amp; Mini Apps.">
+  <title>rustgram-api — Telegram Bot API 10.4 Library for Rust (EN / RU)</title>
+  <meta name="description" content="Bilingual documentation for rustgram-api: async Telegram Bot API 10.4 Rust library with HTML Widgets, TON Wallet flows, Rich Messages, Stoppable Streaming, Ephemeral Messages, FSM, Router, Polling, Webhooks &amp; Mini Apps.">
   <link rel="stylesheet" href="./assets/styles.css">
   <script defer src="./assets/app.js"></script>
 </head>
@@ -12,12 +12,12 @@
   <header class="topbar">
     <div class="brand">
       <button id="menu-toggle" class="btn mobile-menu-btn" type="button" aria-label="Toggle menu">☰</button>
-      <span>rustgram</span>
+      <span>rustgram-api</span>
       <span class="brand-badge">Bot API 10.4</span>
     </div>
 
     <div class="topbar-controls">
-      <a class="btn" href="./api/rustgram/index.html">
+      <a class="btn" href="./api/rustgram_api/index.html">
         <span data-lang="en">Rustdoc API</span>
         <span data-lang="ru">Rustdoc API</span>
       </a>
@@ -93,7 +93,7 @@
         <span data-lang="en">Full Manuals &amp; Docs</span>
         <span data-lang="ru">Полные руководства</span>
       </div>
-      <a class="nav-link" href="./api/rustgram/index.html">
+      <a class="nav-link" href="./api/rustgram_api/index.html">
         <span data-lang="en">Generated Rustdoc (&rarr;)</span>
         <span data-lang="ru">Справочник Rustdoc (&rarr;)</span>
       </a>
@@ -105,10 +105,10 @@
       <!-- 1. OVERVIEW -->
       <section id="overview" class="doc-section">
         <div data-lang="en">
-          <h1>rustgram</h1>
+          <h1>rustgram-api</h1>
           <p>
             Strongly-typed, ergonomic asynchronous Rust library and bot framework targeting
-            <strong>Telegram Bot API 10.4</strong> (<code>rustgram::BOT_API_VERSION == "10.4"</code>).
+            <strong>Telegram Bot API 10.4</strong> (<code>rustgram_api::BOT_API_VERSION == "10.4"</code>).
           </p>
           <div class="hero-pills">
             <span class="pill api">Bot API 10.4</span>
@@ -138,15 +138,15 @@
           </div>
           <div class="callout tip">
             <strong>API Reference:</strong> Browse generated Rustdoc documentation for every type, trait, and request builder at
-            <a href="./api/rustgram/index.html"><code>./api/rustgram/index.html</code></a>.
+            <a href="./api/rustgram_api/index.html"><code>./api/rustgram_api/index.html</code></a>.
           </div>
         </div>
 
         <div data-lang="ru">
-          <h1>rustgram</h1>
+          <h1>rustgram-api</h1>
           <p>
             Типизированная, эргономичная асинхронная библиотека и фреймворк на Rust для создания Telegram-ботов с поддержкой
-            <strong>Telegram Bot API 10.4</strong> (<code>rustgram::BOT_API_VERSION == "10.4"</code>).
+            <strong>Telegram Bot API 10.4</strong> (<code>rustgram_api::BOT_API_VERSION == "10.4"</code>).
           </p>
           <div class="hero-pills">
             <span class="pill api">Bot API 10.4</span>
@@ -176,7 +176,7 @@
           </div>
           <div class="callout tip">
             <strong>Справочник Rustdoc:</strong> Полная API-документация по всем типам, трейтам и билдерам запросов доступна по адресу
-            <a href="./api/rustgram/index.html"><code>./api/rustgram/index.html</code></a>.
+            <a href="./api/rustgram_api/index.html"><code>./api/rustgram_api/index.html</code></a>.
           </div>
         </div>
       </section>
@@ -185,9 +185,9 @@
       <section id="quickstart" class="doc-section">
         <div data-lang="en">
           <h2>Quick Start &amp; Cargo Features</h2>
-          <p>Add <code>rustgram</code> and <code>tokio</code> to your project's <code>Cargo.toml</code>:</p>
+          <p>Add <code>rustgram-api</code> and <code>tokio</code> to your project's <code>Cargo.toml</code>:</p>
           <pre><code>[dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram" }
+rustgram-api = "0.1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }</code></pre>
 
           <table>
@@ -196,13 +196,13 @@ tokio = { version = "1", features = ["macros", "rt-multi-thread"] }</code></pre>
             </thead>
             <tbody>
               <tr><td><code>rustls-tls</code></td><td>Yes</td><td>TLS via <code>rustls</code> + <code>ring</code> in <code>reqwest</code> without OpenSSL system dependencies.</td></tr>
-              <tr><td><code>webhook</code></td><td>Yes</td><td><code>rustgram::webhook</code> module (<code>axum</code> webhook server, secret token guard, parser).</td></tr>
-              <tr><td><code>webapp</code></td><td>Yes</td><td><code>rustgram::webapp</code> module (Telegram Mini App <code>initData</code> HMAC-SHA256 verification).</td></tr>
+              <tr><td><code>webhook</code></td><td>Yes</td><td><code>rustgram_api::webhook</code> module (<code>axum</code> webhook server, secret token guard, parser).</td></tr>
+              <tr><td><code>webapp</code></td><td>Yes</td><td><code>rustgram_api::webapp</code> module (Telegram Mini App <code>initData</code> HMAC-SHA256 verification).</td></tr>
             </tbody>
           </table>
 
           <h3>Minimal Echo Bot</h3>
-          <pre><code>use rustgram::prelude::*;
+          <pre><code>use rustgram_api::prelude::*;
 
 #[tokio::main]
 async fn main() -&gt; Result&lt;()&gt; {
@@ -211,8 +211,8 @@ async fn main() -&gt; Result&lt;()&gt; {
     let router = Router::new()
         .route(on::command("start"), |ctx: Context| async move {
             ctx.reply(format!(
-                "Hello! Running on rustgram (Bot API {})",
-                rustgram::BOT_API_VERSION
+                "Hello! Running on rustgram-api (Bot API {})",
+                rustgram_api::BOT_API_VERSION
             ))
             .await?;
             Ok(())
@@ -231,9 +231,9 @@ async fn main() -&gt; Result&lt;()&gt; {
 
         <div data-lang="ru">
           <h2>Быстрый старт и Cargo-фичи</h2>
-          <p>Добавьте <code>rustgram</code> и <code>tokio</code> в <code>Cargo.toml</code> вашего проекта:</p>
+          <p>Добавьте <code>rustgram-api</code> и <code>tokio</code> в <code>Cargo.toml</code> вашего проекта:</p>
           <pre><code>[dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram" }
+rustgram-api = "0.1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }</code></pre>
 
           <table>
@@ -242,13 +242,13 @@ tokio = { version = "1", features = ["macros", "rt-multi-thread"] }</code></pre>
             </thead>
             <tbody>
               <tr><td><code>rustls-tls</code></td><td>Да</td><td>TLS на базе <code>rustls</code> + <code>ring</code> для <code>reqwest</code> без зависимости от системного OpenSSL.</td></tr>
-              <tr><td><code>webhook</code></td><td>Да</td><td>Модуль <code>rustgram::webhook</code> (роутер и HTTP-сервер на <code>axum</code>, проверка секретного заголовка).</td></tr>
-              <tr><td><code>webapp</code></td><td>Да</td><td>Модуль <code>rustgram::webapp</code> (проверка подписи <code>initData</code> Mini Apps по HMAC-SHA256).</td></tr>
+              <tr><td><code>webhook</code></td><td>Да</td><td>Модуль <code>rustgram_api::webhook</code> (роутер и HTTP-сервер на <code>axum</code>, проверка секретного заголовка).</td></tr>
+              <tr><td><code>webapp</code></td><td>Да</td><td>Модуль <code>rustgram_api::webapp</code> (проверка подписи <code>initData</code> Mini Apps по HMAC-SHA256).</td></tr>
             </tbody>
           </table>
 
           <h3>Минимальный эхо-бот</h3>
-          <pre><code>use rustgram::prelude::*;
+          <pre><code>use rustgram_api::prelude::*;
 
 #[tokio::main]
 async fn main() -&gt; Result&lt;()&gt; {
@@ -257,8 +257,8 @@ async fn main() -&gt; Result&lt;()&gt; {
     let router = Router::new()
         .route(on::command("start"), |ctx: Context| async move {
             ctx.reply(format!(
-                "Привет! Бот работает на rustgram (Bot API {})",
-                rustgram::BOT_API_VERSION
+                "Привет! Бот работает на rustgram-api (Bot API {})",
+                rustgram_api::BOT_API_VERSION
             ))
             .await?;
             Ok(())
@@ -285,8 +285,8 @@ async fn main() -&gt; Result&lt;()&gt; {
             Calling <code>.send().await</code> or simply <code>.await</code> dispatches the JSON or multipart HTTP request.
           </p>
           <pre><code>use std::time::Duration;
-use rustgram::prelude::*;
-use rustgram::types::InputFile;
+use rustgram_api::prelude::*;
+use rustgram_api::types::InputFile;
 
 async fn setup_and_send(token: &amp;str, chat_id: i64) -&gt; Result&lt;()&gt; {
     let bot = Bot::builder(token)
@@ -331,8 +331,8 @@ async fn setup_and_send(token: &amp;str, chat_id: i64) -&gt; Result&lt;()&gt; {
             Структура <code>Bot</code> дёшево клонируется (обёрнута в <code>Arc</code>), а каждый запрос Bot API реализован как билдер с поддержкой <code>IntoFuture&lt;Output = Result&lt;T&gt;&gt;</code> — достаточно вызвать <code>.await</code> или <code>.send().await</code>.
           </p>
           <pre><code>use std::time::Duration;
-use rustgram::prelude::*;
-use rustgram::types::InputFile;
+use rustgram_api::prelude::*;
+use rustgram_api::types::InputFile;
 
 async fn setup_and_send(token: &amp;str, chat_id: i64) -&gt; Result&lt;()&gt; {
     let bot = Bot::builder(token)
@@ -377,12 +377,12 @@ async fn setup_and_send(token: &amp;str, chat_id: i64) -&gt; Result&lt;()&gt; {
         <div data-lang="en">
           <h2>Router, Filters, Middleware &amp; Dependency Injection</h2>
           <p>
-            <code>Router</code> evaluates routes top-to-bottom. Combine built-in filters in <code>rustgram::router::on</code> with
+            <code>Router</code> evaluates routes top-to-bottom. Combine built-in filters in <code>rustgram_api::router::on</code> with
             <code>.and()</code>, <code>.or()</code>, <code>!filter</code>, or <code>.negated()</code>, write custom predicates using <code>filter_fn</code> / <code>async_filter</code>,
             group sub-routers via <code>.nest()</code>, attach cross-cutting middleware via <code>.layer()</code>, and inject shared dependencies via <code>Dispatcher::manage()</code>.
           </p>
           <pre><code>use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 use tokio::sync::Mutex;
 
 #[derive(Default)]
@@ -439,12 +439,12 @@ fn build_router(metrics: Arc&lt;Metrics&gt;) -&gt; Dispatcher {
         <div data-lang="ru">
           <h2>Роутер, фильтры, Middleware и DI</h2>
           <p>
-            <code>Router</code> проверяет маршруты сверху вниз. Комбинируйте фильтры из <code>rustgram::router::on</code> через
+            <code>Router</code> проверяет маршруты сверху вниз. Комбинируйте фильтры из <code>rustgram_api::router::on</code> через
             <code>.and()</code>, <code>.or()</code>, <code>!filter</code> или <code>.negated()</code>, пишите свои условия на <code>filter_fn</code> / <code>async_filter</code>,
             вкладывайте под-роутеры через <code>.nest()</code>, добавляйте middleware через <code>.layer()</code> и передавайте общие сервисы через <code>Dispatcher::manage()</code>.
           </p>
           <pre><code>use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 use tokio::sync::Mutex;
 
 #[derive(Default)]
@@ -509,7 +509,7 @@ fn build_router(metrics: Arc&lt;Metrics&gt;) -&gt; Dispatcher {
             Implement <code>StateStorage&lt;S&gt;</code> for Redis, PostgreSQL, or SQLite backends when scaling horizontally.
           </p>
           <pre><code>use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum OrderStep {
@@ -555,7 +555,7 @@ fn fsm_router(bot: Bot) -&gt; Dispatcher {
             Для продакшена с несколькими инстансами достаточно реализовать <code>StateStorage&lt;S&gt;</code> поверх Redis или SQL.
           </p>
           <pre><code>use std::sync::Arc;
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum OrderStep {
@@ -600,7 +600,7 @@ fn fsm_router(bot: Bot) -&gt; Dispatcher {
           <h2>HTML Widgets &amp; TON Wallet Integration (Bot API 10.4)</h2>
           <p>
             Bot API 10.4 introduces interactive in-chat HTML widgets and native TON wallet operations.
-            <code>rustgram</code> validates HTML/data byte bounds and NUL characters locally before hitting the network,
+            <code>rustgram-api</code> validates HTML/data byte bounds and NUL characters locally before hitting the network,
             and provides typed variants for every <code>WidgetQueryType</code> callback.
           </p>
           <table>
@@ -616,7 +616,7 @@ fn fsm_router(bot: Bot) -&gt; Dispatcher {
             </tbody>
           </table>
 
-          <pre><code>use rustgram::prelude::*;
+          <pre><code>use rustgram_api::prelude::*;
 
 fn widget_routes() -&gt; Router {
     Router::new()
@@ -658,7 +658,7 @@ fn widget_routes() -&gt; Router {
           <h2>HTML-виджеты и TON-кошелёк (Bot API 10.4)</h2>
           <p>
             В Bot API 10.4 появились интерактивные HTML-виджеты прямо внутри сообщений чата и интеграция с TON-кошельком.
-            <code>rustgram</code> заранее проверяет ограничения на размер HTML и JSON-данных до отправки HTTP-запроса и
+            <code>rustgram-api</code> заранее проверяет ограничения на размер HTML и JSON-данных до отправки HTTP-запроса и
             типизирует все события <code>WidgetQueryType</code>.
           </p>
           <table>
@@ -674,7 +674,7 @@ fn widget_routes() -&gt; Router {
             </tbody>
           </table>
 
-          <pre><code>use rustgram::prelude::*;
+          <pre><code>use rustgram_api::prelude::*;
 
 fn widget_routes() -&gt; Router {
     Router::new()
@@ -721,8 +721,8 @@ fn widget_routes() -&gt; Router {
             Build structured multi-block layouts with <code>InputRichMessage</code> (HTML, Markdown, or explicit <code>Vec&lt;RichBlock&gt;</code>)
             and stream real-time LLM responses using <code>send_message_draft</code> or <code>send_rich_message_draft</code> with user-cancellable Stop controls.
           </p>
-          <pre><code>use rustgram::prelude::*;
-use rustgram::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
+          <pre><code>use rustgram_api::prelude::*;
+use rustgram_api::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
 
 async fn stream_and_finalize(bot: &amp;Bot, chat_id: i64, draft_id: i64) -&gt; Result&lt;()&gt; {
     // 1. Stream stoppable thinking/partial draft
@@ -774,8 +774,8 @@ async fn stream_and_finalize(bot: &amp;Bot, chat_id: i64, draft_id: i64) -&gt; R
             Создавайте структурированные сообщения через <code>InputRichMessage</code> (HTML, Markdown или набор блоков <code>Vec&lt;RichBlock&gt;</code>)
             и транслируйте ответы AI в реальном времени через <code>send_message_draft</code> или <code>send_rich_message_draft</code> с поддержкой кнопки «Стоп».
           </p>
-          <pre><code>use rustgram::prelude::*;
-use rustgram::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
+          <pre><code>use rustgram_api::prelude::*;
+use rustgram_api::types::{InputRichMessage, RichBlock, RichBlockTableCell, RichMessageButton};
 
 async fn stream_and_finalize(bot: &amp;Bot, chat_id: i64, draft_id: i64) -&gt; Result&lt;()&gt; {
     // 1. Отправка стримингового черновика с возможностью остановки
@@ -835,8 +835,8 @@ async fn stream_and_finalize(bot: &amp;Bot, chat_id: i64, draft_id: i64) -&gt; R
             <li><strong>Managed Bots (9.6–10.4):</strong> Request bot creation via <code>KeyboardButton::request_managed_bot(...)</code> with custom emoji icons (<code>.icon_custom_emoji(...)</code>), handle <code>on::managed_bot()</code>, and manage tokens/access via <code>get_managed_bot_token</code>, <code>replace_managed_bot_token</code>, <code>get_managed_bot_access_settings</code>, and <code>set_managed_bot_access_settings</code>.</li>
             <li><strong>Communities, Subscriptions &amp; Entities:</strong> Handle <code>on::subscription()</code> (<code>BotSubscriptionUpdated</code>), <code>set_chat_member_tag</code>, <code>answer_chat_join_request_query</code>, <code>get_user_personal_chat_messages</code>, <code>create_forum_topic</code>, and <code>date_time</code> entities.</li>
           </ul>
-          <pre><code>use rustgram::prelude::*;
-use rustgram::types::{BotCommand, EphemeralMessageParameters, KeyboardButton, KeyboardButtonRequestManagedBot};
+          <pre><code>use rustgram_api::prelude::*;
+use rustgram_api::types::{BotCommand, EphemeralMessageParameters, KeyboardButton, KeyboardButtonRequestManagedBot};
 
 async fn send_ephemeral_and_commands(bot: &amp;Bot, callback_query_id: &amp;str, chat_id: i64) -&gt; Result&lt;()&gt; {
     // Ephemeral command in chat menu
@@ -874,8 +874,8 @@ async fn send_ephemeral_and_commands(bot: &amp;Bot, callback_query_id: &amp;str,
             <li><strong>Управляемые боты (9.6–10.4):</strong> Кнопки <code>KeyboardButton::request_managed_bot(...)</code> с иконкой <code>.icon_custom_emoji(...)</code>, обновления <code>on::managed_bot()</code> и методы <code>get_managed_bot_token</code>, <code>replace_managed_bot_token</code>, <code>get_managed_bot_access_settings</code>, <code>set_managed_bot_access_settings</code>.</li>
             <li><strong>Сообщества, подписки и сущности:</strong> Поддержка <code>on::subscription()</code> (<code>BotSubscriptionUpdated</code>), <code>set_chat_member_tag</code>, <code>answer_chat_join_request_query</code>, <code>get_user_personal_chat_messages</code>, <code>create_forum_topic</code> и <code>date_time</code>.</li>
           </ul>
-          <pre><code>use rustgram::prelude::*;
-use rustgram::types::{BotCommand, EphemeralMessageParameters, KeyboardButton, KeyboardButtonRequestManagedBot};
+          <pre><code>use rustgram_api::prelude::*;
+use rustgram_api::types::{BotCommand, EphemeralMessageParameters, KeyboardButton, KeyboardButtonRequestManagedBot};
 
 async fn send_ephemeral_and_commands(bot: &amp;Bot, callback_query_id: &amp;str, chat_id: i64) -&gt; Result&lt;()&gt; {
     // Эфемерная команда в меню бота
@@ -909,10 +909,10 @@ async fn send_ephemeral_and_commands(bot: &amp;Bot, callback_query_id: &amp;str,
           <h2>Polling, Axum Webhooks, Mini Apps &amp; Formatting</h2>
           <p>Choose between resilient long polling (with exponential backoff and graceful shutdown via <code>CancellationToken</code>) or an <code>axum</code> webhook server, plus helpers for Mini App signature verification and safe markup.</p>
           <pre><code>use std::net::SocketAddr;
-use rustgram::formatting::{bold_html, date_time_html, escape_html};
-use rustgram::prelude::*;
-use rustgram::webapp::verify_init_data;
-use rustgram::webhook::{WebhookConfig, serve_webhook};
+use rustgram_api::formatting::{bold_html, date_time_html, escape_html};
+use rustgram_api::prelude::*;
+use rustgram_api::webapp::verify_init_data;
+use rustgram_api::webhook::{WebhookConfig, serve_webhook};
 
 async fn run_webhook_and_helpers(bot: Bot, router: Router) -&gt; Result&lt;()&gt; {
     // Safe HTML formatting including Telegram date_time tags
@@ -951,10 +951,10 @@ async fn run_webhook_and_helpers(bot: Bot, router: Router) -&gt; Result&lt;()&gt
           <h2>Polling, Webhook на Axum, Mini Apps и форматирование</h2>
           <p>Запускайте бота через устойчивый long polling (с экспоненциальным бэкоффом и остановкой по <code>CancellationToken</code>) или HTTP-вебхук на базе <code>axum</code>, а также используйте встроенную проверку подписи Mini Apps и безопасное HTML/MarkdownV2-форматирование.</p>
           <pre><code>use std::net::SocketAddr;
-use rustgram::formatting::{bold_html, date_time_html, escape_html};
-use rustgram::prelude::*;
-use rustgram::webapp::verify_init_data;
-use rustgram::webhook::{WebhookConfig, serve_webhook};
+use rustgram_api::formatting::{bold_html, date_time_html, escape_html};
+use rustgram_api::prelude::*;
+use rustgram_api::webapp::verify_init_data;
+use rustgram_api::webhook::{WebhookConfig, serve_webhook};
 
 async fn run_webhook_and_helpers(bot: Bot, router: Router) -&gt; Result&lt;()&gt; {
     // Безопасное HTML-форматирование, включая тег &lt;tg-time&gt; (date_time)
@@ -991,8 +991,8 @@ async fn run_webhook_and_helpers(bot: Bot, router: Router) -&gt; Result&lt;()&gt
       </section>
 
       <footer>
-        <span data-lang="en">rustgram &bull; MIT OR Apache-2.0 &bull; Built for Telegram Bot API 10.4</span>
-        <span data-lang="ru">rustgram &bull; MIT OR Apache-2.0 &bull; Создано для Telegram Bot API 10.4</span>
+        <span data-lang="en">rustgram-api &bull; MIT OR Apache-2.0 &bull; Built for Telegram Bot API 10.4</span>
+        <span data-lang="ru">rustgram-api &bull; MIT OR Apache-2.0 &bull; Создано для Telegram Bot API 10.4</span>
       </footer>
     </main>
   </div>

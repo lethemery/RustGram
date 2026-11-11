@@ -1,11 +1,11 @@
-//! Basic echo and command bot using `rustgram` long polling.
+//! Basic echo and command bot using `rustgram-api` long polling.
 //!
 //! Run with:
 //! ```bash
 //! TELEGRAM_BOT_TOKEN=123456:ABC cargo run --example echo_bot
 //! ```
 
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {

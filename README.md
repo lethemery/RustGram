@@ -1,8 +1,8 @@
-# rustgram
+# rustgram-api
 
-Async, strongly-typed Rust library and framework for building Telegram bots targeting **Telegram Bot API 10.4** (`rustgram::BOT_API_VERSION == "10.4"`).
+Async, strongly-typed Rust library and framework for building Telegram bots targeting **Telegram Bot API 10.4** (`rustgram_api::BOT_API_VERSION == "10.4"`).
 
-**[Documentation Site (GitHub Pages)](https://lethemery.github.io/RustGram/)** · **[Rustdoc API](https://lethemery.github.io/RustGram/api/rustgram/index.html)** · **[English Manual](docs/en/README.md)** · **[Документация на русском](docs/ru/README.md)**
+**[Documentation Site (GitHub Pages)](https://lethemery.github.io/RustGram/)** · **[Rustdoc API](https://lethemery.github.io/RustGram/api/rustgram_api/index.html)** · **[English Manual](docs/en/README.md)** · **[Документация на русском](docs/ru/README.md)**
 
 ---
 
@@ -24,21 +24,21 @@ Async, strongly-typed Rust library and framework for building Telegram bots targ
 
 ```toml
 [dependencies]
-rustgram = { git = "https://github.com/lethemery/RustGram" }
+rustgram-api = "0.1"
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
 Cargo features:
 - `rustls-tls` *(default)* — TLS via `rustls` + `ring`.
-- `webhook` *(default)* — Axum webhook router & server (`rustgram::webhook`).
-- `webapp` *(default)* — Mini App `initData` HMAC-SHA256 verifier (`rustgram::webapp`).
+- `webhook` *(default)* — Axum webhook router & server (`rustgram_api::webhook`).
+- `webapp` *(default)* — Mini App `initData` HMAC-SHA256 verifier (`rustgram_api::webapp`).
 
 ---
 
 ## Quick Start
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -46,7 +46,7 @@ async fn main() -> Result<()> {
 
     let router = Router::new()
         .route(on::command("start"), |ctx: Context| async move {
-            ctx.reply("Hello from rustgram (Bot API 10.4)!").await?;
+            ctx.reply("Hello from rustgram-api (Bot API 10.4)!").await?;
             Ok(())
         })
         .route(on::text(), |ctx: Context| async move {
@@ -66,7 +66,7 @@ async fn main() -> Result<()> {
 ### Interactive HTML Widget (Bot API 10.4)
 
 ```rust,no_run
-use rustgram::prelude::*;
+use rustgram_api::prelude::*;
 
 async fn send_ton_widget(bot: &Bot, chat_id: i64) -> Result<()> {
     let html = r#"<button onclick="TelegramWidget.request('pay')">Send TON</button>"#;
@@ -105,7 +105,7 @@ cargo test --all-targets
 ## Documentation
 
 - **GitHub Pages Documentation:** [https://lethemery.github.io/RustGram/](https://lethemery.github.io/RustGram/) ([`docs/index.html`](docs/index.html)) — EN / RU switcher, light/dark themes, search, copyable snippets.
-- **Rustdoc API Reference:** [https://lethemery.github.io/RustGram/api/rustgram/index.html](https://lethemery.github.io/RustGram/api/rustgram/index.html)
+- **Rustdoc API Reference:** [https://lethemery.github.io/RustGram/api/rustgram_api/index.html](https://lethemery.github.io/RustGram/api/rustgram_api/index.html)
 - **Full Developer Guides:** [English](docs/en/README.md) · [Русский](docs/ru/README.md)
 
 ---

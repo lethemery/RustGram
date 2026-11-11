@@ -1,11 +1,14 @@
 [package]
-name = "rustgram"
+name = "rustgram-api"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.85"
 description = "Ergonomic async Telegram Bot API 10.4 library for Rust featuring HTML Widgets, Rich Messages, Ephemeral Messages, Guest Mode, Managed Bots, Router, and FSM."
 readme = "README.md"
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/lethemery/RustGram"
+homepage = "https://lethemery.github.io/RustGram/"
+documentation = "https://docs.rs/rustgram-api"
 keywords = ["telegram", "bot", "bot-api", "async", "telegram-bot"]
 categories = ["api-bindings", "asynchronous", "web-programming"]
 
